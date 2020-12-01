@@ -76,13 +76,17 @@ def scrape_mars():
                "image_url": img_url}
         img_urls.append(data)
 
-    output = {"News_Title": news_title,
+    mars_data = {
+                "News_Title": news_title,
                 "News_Paragraph": news_p,
                 "Featured_Image": featured_image_url,
                 "Mars_Facts": mars_facts,
                 "Mars_Hemispheres": img_urls
                 }
-    return output
+
+    browser.quit()
+    
+    return mars_data
     
 
 
