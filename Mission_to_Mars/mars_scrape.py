@@ -4,9 +4,7 @@ import pymongo
 import pandas as pd
 import time
 
-client = pymongo.MongoClient("mongodb://localhost:27017/")
-db = client.mars_db
-collection = db.mars
+
 
 def init_browser():
 
@@ -16,53 +14,59 @@ def init_browser():
 
 def scrape():
 
-# NASA News Scrape
     browser = init_browser()
+    # collection.drop()
+
+# NASA News Scrape
+    
 
     url = "https://mars.nasa.gov/news/"
     browser.visit(url)
     time.sleep(3)
 
-    html = browser.html
-    soup = bs(html, "html.parser")
+    news_html = browser.html
+    news_soup= bs(news_html, "html.parser")
 
-    news_title = soup.find("div", class_= "list_text").find("div", class_= "content_title").text
+    news_title = news_soup.find("div", class_= "list_text").find("div", class_= "content_title").text
     # news_title
 
-    news_p = soup.find("div", class_= "list_text").find("div", class_= "article_teaser_body").text
+    news_p = news_soup.find("div", class_= "list_text").find("div", class_= "article_teaser_body").text
     # news_p
+    # print(news_p)
 
-    browser.quit()
+    # browser.quit()
 
-# Mars Featured Image Scrape
+## Mars Featured Image Scrape
 
-    browser = init_browser()
+    # browser = init_browser()
     url2 = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
     browser.visit(url2)
-    time.sleep(3)
+    time.sleep(5)
 
     browser.click_link_by_partial_text("FULL IMAGE")
     time.sleep(3)
 
-    html = browser.html
-    soup = bs(html, "html.parser")
+    img_html = browser.html
+    img_soup = bs(img_html, "html.parser")
 
-    image = soup.find("div", class_="fancybox-inner").find("img", class_="fancybox-image")["src"]
+    image = img_soup.find("div", class_="fancybox-inner").find("img", class_="fancybox-image")["src"]
     image
 
     image_base = "https://www.jpl.nasa.gov"
     featured_image_url = image_base + image
-    featured_image_url
+    # featured_image_url
 
-    browser.quit()
+    # browser.quit()
 
-# Mars Facts Scrape
+## Mars Facts Scrape
 
-    browser = init_browser()
+    # browser = init_browser()
 
     url3 = "https://space-facts.com/mars/"
+    browser.visit(url3)
+    time.sleep(3)
     mars_table = pd.read_html(url3)
-    mars_table
+    # mars_table
 
     mars_facts = mars_table[0]
     mars_facts = mars_facts.set_index(0)
@@ -70,7 +74,7 @@ def scrape():
     mars_facts = mars_facts.to_html()
     mars_facts = mars_facts.replace("\n", "")
     mars_facts = mars_facts.replace("<th>0</th>", "<th>Description</th>")
-    mars_facts
+    # mars_facts
 
     browser.quit()
 
@@ -90,14 +94,14 @@ def scrape():
     # img_titles = []
 
     # for hemi in hemispheres:
-    #     title = hemi.find("h3").text
+    #     titles = hemi.find("h3").text
     #     browser.click_link_by_partial_text(title)
     #     time.sleep(3)
     #     html = browser.html
     #     soup = bs(html, "html.parser")
     #     img_url = soup.find("div", class_="downloads").find("a")["href"]
     #     browser.back()
-    #     data = {"title": title,
+    #     data = {"title": titles,
     #             "image_url": img_url}
     #     img_urls.append(data)
 
@@ -112,6 +116,6 @@ def scrape():
                 # "Hemisphere_URLs":img_urls
                 }
 
-    collection.insert(mars_update)
+    # collection.insert(mars_update)
 
     return mars_update
