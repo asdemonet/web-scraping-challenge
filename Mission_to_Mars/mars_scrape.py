@@ -5,7 +5,6 @@ import pandas as pd
 import time
 
 
-
 def init_browser():
 
     executable_path = {"executable_path":"/usr/local/bin/chromedriver"}
@@ -38,43 +37,43 @@ def scrape():
 
 ## Mars Featured Image Scrape
 
-    # browser = init_browser()
-    url2 = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
-    browser.visit(url2)
-    time.sleep(5)
+    # # browser = init_browser()
+    # url2 = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
+    # browser.visit(url2)
+    # time.sleep(5)
 
-    browser.click_link_by_partial_text("FULL IMAGE")
-    time.sleep(3)
+    # browser.click_link_by_partial_text("FULL IMAGE")
+    # time.sleep(3)
 
-    img_html = browser.html
-    img_soup = bs(img_html, "html.parser")
+    # img_html = browser.html
+    # img_soup = bs(img_html, "html.parser")
 
-    image = img_soup.find("div", class_="fancybox-inner").find("img", class_="fancybox-image")["src"]
-    image
+    # image = img_soup.find("div", class_="fancybox-inner").find("img", class_="fancybox-image")["src"]
+    # image
 
-    image_base = "https://www.jpl.nasa.gov"
-    featured_image_url = image_base + image
-    # featured_image_url
+    # image_base = "https://www.jpl.nasa.gov"
+    # featured_image_url = image_base + image
+    # # featured_image_url
 
     # browser.quit()
 
 ## Mars Facts Scrape
 
-    # browser = init_browser()
+    # # browser = init_browser()
 
-    url3 = "https://space-facts.com/mars/"
-    browser.visit(url3)
-    time.sleep(3)
-    mars_table = pd.read_html(url3)
-    # mars_table
+    # url3 = "https://space-facts.com/mars/"
+    # browser.visit(url3)
+    # time.sleep(3)
+    # mars_table = pd.read_html(url3)
+    # # mars_table
 
-    mars_facts = mars_table[0]
-    mars_facts = mars_facts.set_index(0)
-    mars_facts = mars_facts.rename(columns={1: "Mars"})
-    mars_facts = mars_facts.to_html()
-    mars_facts = mars_facts.replace("\n", "")
-    mars_facts = mars_facts.replace("<th>0</th>", "<th>Description</th>")
-    # mars_facts
+    # mars_facts = mars_table[0]
+    # mars_facts = mars_facts.set_index(0)
+    # mars_facts = mars_facts.rename(columns={1: "Mars"})
+    # mars_facts = mars_facts.to_html()
+    # mars_facts = mars_facts.replace("\n", "")
+    # mars_facts = mars_facts.replace("<th>0</th>", "<th>Description</th>")
+    # # mars_facts
 
     browser.quit()
 
@@ -110,8 +109,8 @@ def scrape():
     mars_update = {
                 "News_Title": news_title,
                 "News_Paragraph": news_p,
-                "Featured_Image": featured_image_url,
-                "Mars_Facts": mars_facts,
+                # "Featured_Image": featured_image_url,
+                # "Mars_Facts": mars_facts,
                 # "Hemisphere_Titles": img_titles,
                 # "Hemisphere_URLs":img_urls
                 }
