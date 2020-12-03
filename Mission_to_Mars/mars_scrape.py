@@ -15,6 +15,8 @@ def init_browser():
     return browser
 
 def scrape():
+
+# NASA News Scrape
     browser = init_browser()
 
     url = "https://mars.nasa.gov/news/"
@@ -31,6 +33,8 @@ def scrape():
     # news_p
 
     browser.quit()
+
+# Mars Featured Image Scrape
 
     browser = init_browser()
     url2 = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
@@ -52,6 +56,8 @@ def scrape():
 
     browser.quit()
 
+# Mars Facts Scrape
+
     browser = init_browser()
 
     url3 = "https://space-facts.com/mars/"
@@ -68,42 +74,42 @@ def scrape():
 
     browser.quit()
 
-    browser = init_browser()
-    url4 = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-    browser.visit(url4)
-    time.sleep(3)
-    html = browser.html
-    soup = bs(html, "html.parser")
+# Mars Hemisphere Images Scrape
 
-    hemispheres = soup.find_all("div", class_="item")
-    hemispheres
+    # browser = init_browser()
+    # url4 = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    # browser.visit(url4)
+    # time.sleep(3)
+    # html = browser.html
+    # soup = bs(html, "html.parser")
 
-    img_urls = []
+    # hemispheres = soup.find_all("div", class_="item")
+    # hemispheres
+
+    # img_urls = []
     # img_titles = []
 
-    for hemi in hemispheres:
-        title = hemi.find("h3").text
-        browser.click_link_by_partial_text(title)
-        time.sleep(10)
-        html = browser.html
-        soup = bs(html, "html.parser")
-        img_url = soup.find("div", class_="downloads").find("a")["href"]
-        browser.back()
-        data = {"title": title,
-                "image_url": img_url}
-        img_urls.append(data)
-        # img_urls.append(img_url)
-        # img_titles.append(title)
+    # for hemi in hemispheres:
+    #     title = hemi.find("h3").text
+    #     browser.click_link_by_partial_text(title)
+    #     time.sleep(3)
+    #     html = browser.html
+    #     soup = bs(html, "html.parser")
+    #     img_url = soup.find("div", class_="downloads").find("a")["href"]
+    #     browser.back()
+    #     data = {"title": title,
+    #             "image_url": img_url}
+    #     img_urls.append(data)
 
-        browser.quit()
+    #     browser.quit()
 
     mars_update = {
                 "News_Title": news_title,
                 "News_Paragraph": news_p,
                 "Featured_Image": featured_image_url,
                 "Mars_Facts": mars_facts,
-                "Hemisphere_Titles": img_titles,
-                "Hemisphere_URLs":img_urls
+                # "Hemisphere_Titles": img_titles,
+                # "Hemisphere_URLs":img_urls
                 }
 
     collection.insert(mars_update)

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
 import pymongo
+from pymongo import MongoClient
 import mars_scrape
 
 # Create an instance of Flask
@@ -31,10 +32,10 @@ def scrape():
     mars_scrape.scrape()
 
     # Update the Mongo database using update and upsert=True
-    collection.update({}, mars_update, upsert=True)
+    db.collection.update({}, mars_update, upsert=True)
 
     # Redirect back to home page
-    return redirect("/")
+    return redirect("/", code = 302)
 
 
 if __name__ == "__main__":
