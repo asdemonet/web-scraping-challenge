@@ -38,13 +38,9 @@
       <h3><strong>Mars Facts</strong></h3>
         <div class="row">
           <div class="col-md-12">
-            <div class="box">
-              <div class="facts">
-                <div class="table">
-                  {{mars_update.Mars_Facts}}
-                </div>
-              </div>
-            </div>
+         
+                  {{mars_update.Mars_Facts | safe}}
+          
           </div>
         </div>
       <h2><strong>Mars Hemispheres</strong></h2>
@@ -53,9 +49,9 @@
           <div class="col-md-12">
             <div class="box">
               <div class="hemisphere-imgs">
-                {% for image in mars_update %}
-                <img id="image" src="{{ mars_update.Hemisphere_URLs }}" alt="Images of the hemispheres of Mars">
-                <h5>{{ mars_update.Hemisphere_Titles }}</h5>
+                {% for image in mars_update.Hemisphere_URLs %}
+                <img id="image" src="{{ image.image_url }}" alt="Images of the hemispheres of Mars">
+                <h5>{{ image.title }}</h5>
                 {% endfor %}
               </div>
             </div>
