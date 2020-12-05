@@ -20,80 +20,28 @@
         <div class="row">
           <div class="col-md-12">
             <div class="box">
-              <h3>{{ mars_update.news_title }}</h3>
-              <p>{{ mars_update.news_p }}</p>
+              <h3>{{ mars_update.News_Title }}</h3>
+              <p>{{ mars_update.News_Paragraph }}</p>
             </div>
           </div>
         </div> 
-      <!-- <h2><strong>Featured Mars Image</strong></h2>    
+      <h2><strong>Featured Mars Image</strong></h2>    
         <div class="row">
           <div class="col-md-12">
             <div class="box">
               <div class="featured-img">
-                <img src="{{ mars_update.featured_image_url }}" alt="Featured image of Mars">
+                <img src="{{ mars_update.Featured_Image }}" alt="Featured image of Mars">
               </div>
             </div>
           </div>
-        </div>  -->
-      <!-- <h3><strong>Mars Facts</strong></h3>
+        </div>
+      <h3><strong>Mars Facts</strong></h3>
         <div class="row">
           <div class="col-md-12">
             <div class="box">
               <div class="facts">
-      
                 <div class="table">
-
-                  <table border="1" class="dataframe">
-                    <thead>
-                      <tr style="text-align: right;">
-                        <th></th>
-                        <th>Mars</th>
-                      </tr>
-                      <tr>
-                        <th>Description</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>Equatorial Diameter:</th>
-                        <td>6,792 km</td>
-                      </tr>
-                      <tr>
-                        <th>Polar Diameter:</th>
-                        <td>6,752 km</td>
-                      </tr>
-                      <tr>
-                        <th>Mass:</th>
-                        <td>6.39 × 10^23 kg (0.11 Earths)</td>
-                      </tr>
-                      <tr>
-                        <th>Moons:</th>
-                        <td>2 (Phobos &amp; Deimos)</td>
-                      </tr>
-                      <tr>
-                        <th>Orbit Distance:</th>
-                        <td>227,943,824 km (1.38 AU)</td>
-                      </tr>
-                      <tr>
-                        <th>Orbit Period:</th>
-                        <td>687 days (1.9 years)</td>
-                      </tr>
-                      <tr>
-                        <th>Surface Temperature:</th>
-                        <td>-87 to -5 °C</td>
-                      </tr>
-                      <tr>
-                        <th>First Record:</th>
-                        <td>2nd millennium BC</td>
-                      </tr>
-                      <tr>
-                        <th>Recorded By:</th>
-                        <td>Egyptian astronomers</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
+                  {{mars_update.Mars_Facts}}
                 </div>
               </div>
             </div>
@@ -101,17 +49,19 @@
         </div>
       <h2><strong>Mars Hemispheres</strong></h2>
         <div class="row">
-          {% for image in mars_update.img_urls %}
+
           <div class="col-md-12">
             <div class="box">
               <div class="hemisphere-imgs">
-                <img id="image" src="{{ mars_update.img_urls }}" alt="Images of the hemispheres of Mars">
-                <h4>"{{ mars.img_urls }}"</h4>
+                {% for image in mars_update %}
+                <img id="image" src="{{ mars_update.Hemisphere_URLs }}" alt="Images of the hemispheres of Mars">
+                <h5>{{ mars_update.Hemisphere_Titles }}</h5>
+                {% endfor %}
               </div>
             </div>
           </div>
-          {% endfor %}
-        </div> -->
+
+        </div>
 
       </div> 
     </div>
